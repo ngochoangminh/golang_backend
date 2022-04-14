@@ -1,24 +1,21 @@
--- name: CreateTransfers :one
+-- name: CreateTransfer :one
 INSERT INTO transfers (
-  owner, balance, currency
+  from_account_id,
+  to_account_id,
+  amount
 ) VALUES (
   $1, $2, $3
 ) RETURNING *;
 
--- name: GetTransfers :one
+-- name: GetTransfer :one
 SELECT * FROM transfers
 WHERE id = $1 LIMIT 1;
 
 -- name: ListTransfers :many
 SELECT * FROM transfers
-ORDER BY id;
-
--- name: UpdateTransfers :one
-UPDATE transfers
-SET balance = $2
-WHERE id = $1
-RETURNING *;
-
--- name: DeleteTransfers :exec
-DELETE FROM transfers
-WHERE id = $1;
+WHERE 
+    from_account_id = $1 OR
+    to_account_id = $2
+ORDER BY id
+LIMIT $3
+OFFSET $4;
