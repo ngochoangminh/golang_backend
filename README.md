@@ -1,5 +1,6 @@
 # golang_backend
 
+This repos is ref from [course](https://github.com/techschool/simplebank)
 ## Installation
 ### Install golang-migration
 ```
