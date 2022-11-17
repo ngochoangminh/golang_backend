@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ngochoangminh/golang_backend/util"
+	"github.com/ngochoangminh/golang_backend/core/util"
 	"github.com/stretchr/testify/require"
 )
 func createRandomAccount(t *testing.T) Account {

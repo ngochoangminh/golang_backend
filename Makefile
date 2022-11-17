@@ -1,2 +1,2 @@
-DB_URL=postgresql://godb:132456@localhost:5432/simple_bank
+DB_URL=postgresql://ngochm:ngochm@localhost:5432/higate
 
