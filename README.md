@@ -32,3 +32,10 @@ Drop table:
 migrate -path database/migration -database "postgresql://<db_user>:<password>@localhost:5432/db_name" -verbose down
 
 ```
+## Clean Architecture
+| Directory      | Layer               | 
+|----------------|---------------------|
+| domain         | Entities            |
+| infrastructure | Frameworks & Driver |
+| interface      | Interface Adapter   |
+| usecase        | Use cases           |
