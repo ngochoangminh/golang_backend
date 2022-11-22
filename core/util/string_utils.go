@@ -3,8 +3,6 @@ package util
 import (
 	"fmt"
 	"unicode"
-
-	"golang.org/x/text/secure/precis"
     "golang.org/x/text/transform"
     "golang.org/x/text/unicode/norm"
 )

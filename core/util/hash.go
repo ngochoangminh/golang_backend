@@ -8,6 +8,10 @@ import (
 	"github.com/google/uuid"
 )
 
+var (
+	ErrInvalidToken = errors.New("token is invalid")
+	ErrExpiredToken = errors.New("token has expired")
+)
 type Payload struct {
     UserID    uuid.UUID `json:"user_id"`
     IssuedAt  time.Time `json:"issued_at"`
@@ -23,10 +27,6 @@ func NewPayload(userId uuid.UUID, duration time.Duration) (*Payload, error) {
     return payload, nil
 }
 
-var (
-	ErrInvalidToken = errors.New("token is invalid")
-	ErrExpiredToken = errors.New("token has expired")
-)
 
 func (payload *Payload) Valid() error {
 	if time.Now().After(payload.ExpiredAt) {
@@ -39,7 +39,7 @@ func JwtEncode(userId uuid.UUID, key string) (string, error) {
 	payload, err := NewPayload(userId, time.Hour)
 	if err != nil {
 		fmt.Println(err)
-        return nil, err
+        return "", err
     }
 
 	jwtToken := jwt.NewWithClaims(jwt.SigningMethodES256, payload)
@@ -47,7 +47,7 @@ func JwtEncode(userId uuid.UUID, key string) (string, error) {
 	token, err := jwtToken.SignedString([]byte(key))
 	if err != nil {
 		fmt.Println(err)
-		return nil, err
+		return "", err
 	}
 	return token, nil
 }
